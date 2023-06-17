@@ -1,0 +1,21 @@
+const DICO = [
+    "bonjour",
+    "chat",
+    "voiture",
+    "ordinateur",
+    "plage",
+    "soleil",
+    "montagne",
+    "livre",
+    "musique",
+    "avion",
+    "football",
+    "chocolat",
+    "vélo",
+    "papillon",
+    "étoile",
+    "restaurant",
+    "école",
+    "jardin",
+    "amour"
+];

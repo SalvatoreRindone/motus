@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="css/game.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/dico.js"></script>
+    <script src="js/game.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Motus</h1>
+        <div class="scoreContainer">
+            <h3>Partie gagné: <span id="nbOfWin"></span></h3>
+            <h3>Série de victoire: <span id="winningStreak"></span></h3>
+        </div>
+    </header>
+    <main>
+        <div id="com"></div>
+        <table class="container">
+            <tr class="row first"></tr>
+            <tr class="row second"></tr>
+            <tr class="row third"></tr>
+            <tr class="row four"></tr>
+            <tr class="row five"></tr>
+            <tr class="row six"></tr>
+        </table>
+        <div class="keyboard">
+            <div class="letter-firstRow">
+                <div class="keyboardTouch">A</div>
+                <div class="keyboardTouch">Z</div>
+                <div class="keyboardTouch">E</div>
+                <div class="keyboardTouch">R</div>
+                <div class="keyboardTouch">T</div>
+                <div class="keyboardTouch">Y</div>
+                <div class="keyboardTouch">U</div>
+                <div class="keyboardTouch">I</div>
+                <div class="keyboardTouch">O</div>
+                <div class="keyboardTouch">P</div>
+            </div>
+            <div class="letter-secondRow">
+                <div class="keyboardTouch">Q</div>
+                <div class="keyboardTouch">S</div>
+                <div class="keyboardTouch">D</div>
+                <div class="keyboardTouch">F</div>
+                <div class="keyboardTouch">G</div>
+                <div class="keyboardTouch">H</div>
+                <div class="keyboardTouch">J</div>
+                <div class="keyboardTouch">K</div>
+                <div class="keyboardTouch">L</div>
+                <div class="keyboardTouch">M</div>
+            </div>
+            <div class="letter-thirdRow">
+                <div class="keyboardTouch">W</div>
+                <div class="keyboardTouch">X</div>
+                <div class="keyboardTouch">C</div>
+                <div class="keyboardTouch">V</div>
+                <div class="keyboardTouch">B</div>
+                <div class="keyboardTouch">N</div>
+                <div class="imgHolder delete"><img src="img/backspace-icon.webp"></div>
+                <div class="imgHolder enter"><img src="img/enter.png"></div>
+            </div>
+        </div>
+        <div id="restart">
+            Recommencer
+        </div>
+    </main>
+</body>
+
+</html>
