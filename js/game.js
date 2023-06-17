@@ -68,7 +68,7 @@ enterVar = function () {
         turnUserInputOff();
         win = true;
         nbOfWin();
-        localStorage.setItem('previousGameResult','true');
+        localStorage.setItem('previousGameResult', 'true');
         winningStreakNumber();
         colorMaker();
     } else {
@@ -77,7 +77,7 @@ enterVar = function () {
             message = "pas le bon mot!";
         } else {
             message = "GAME OVER!";
-            localStorage.setItem('previousGameResult','false');
+            localStorage.setItem('previousGameResult', 'false');
             winningStreakNumber();
         }
     }
@@ -111,16 +111,16 @@ function table(length) {
     for (let i = 1; i <= length; i++) {
         $('.row').append('<td class="case">.</td>');
     }
-    if(window.innerWidth>500){
-    let containerMidLength = (word.name.length * 50) / 2;
-    $('.container').css('left', 'calc(40% - ' + containerMidLength + 'px)');
-    $('#com').css('left', 'calc(40% - ' + containerMidLength + 'px)');
-    $('#com').css('width', length * 50 + 'px');
-    }else{
+    if (window.innerWidth > 500) {
+        let containerMidLength = (word.name.length * 50) / 2;
+        $('.container').css('left', 'calc(40% - ' + containerMidLength + 'px)');
+        $('#com').css('left', 'calc(40% - ' + containerMidLength + 'px)');
+        $('#com').css('width', length * 50 + 'px');
+    } else {
         let containerMidLength = (word.name.length * 31) / 2;
-    $('.container').css('left', 'calc(40% - ' + containerMidLength + 'px)');
-    $('#com').css('left', 'calc(40% - ' + containerMidLength + 'px)');
-    $('#com').css('width', length * 31 + 'px');
+        $('.container').css('left', 'calc(40% - ' + containerMidLength + 'px)');
+        $('#com').css('left', 'calc(40% - ' + containerMidLength + 'px)');
+        $('#com').css('width', length * 31 + 'px');
     }
 }
 /** Return the right element of the DOM for a specific case */
@@ -220,14 +220,14 @@ function colorMaker() {
             let currentCase = rightCase(i);
             if (word.name.charAt(i) === currentCase.text()) {
                 currentCase.addClass('red');
-                keyboardColor(currentCase.text(),'red');
+                keyboardColor(currentCase.text(), 'red');
                 word.listOfLetter[i] = ".";
                 word.listForRep[i] = ".";
             } else if (word.listForRep.includes(currentCase.text())) {
                 currentCase.addClass('yellow');
                 keyboardColor(currentCase.text(), 'yellow');
                 turnDown(currentCase.text());
-            }else{
+            } else {
                 keyboardColor(currentCase.text(), 'light');
             }
 
@@ -246,11 +246,11 @@ function colorMaker() {
 }
 
 
-function keyboardColor(text, color){
-    table=['.letter-firstRow','.letter-secondRow','.letter-thirdRow'];
-    for(i = 0; i < table.length; i++){
-        for(j = 0; j < $(table[i]).children().length; j++){
-            if($(table[i]).children().eq(j).text()=== text){
+function keyboardColor(text, color) {
+    let table = ['.letter-firstRow', '.letter-secondRow', '.letter-thirdRow'];
+    for (i = 0; i < table.length; i++) {
+        for (j = 0; j < $(table[i]).children().length; j++) {
+            if ($(table[i]).children().eq(j).text() === text) {
                 $(table[i]).children().eq(j).addClass(color);
             }
         }
@@ -284,51 +284,61 @@ function resetGame() {
     cptCol = 0;
     cptRow = 1;
     resetTable();
+    resetKeyboardTouchColor();
     go();
 }
 
-function setNbOfWin(){
+function setNbOfWin() {
     let starter = 0;
-    if(!localStorage.getItem('nbOfWin')){
+    if (!localStorage.getItem('nbOfWin')) {
         localStorage.setItem('nbOfWin', starter.toString());
     }
 }
 
-function setWinningStreak(){
+function setWinningStreak() {
     let starter = 0;
-    if(!localStorage.getItem('winningStreak')){
+    if (!localStorage.getItem('winningStreak')) {
         localStorage.setItem('winningStreak', starter.toString());
     }
 }
 
-function setResultFromPreviousGame(){
-    if(!localStorage.getItem('previousGameResult')){
+function setResultFromPreviousGame() {
+    if (!localStorage.getItem('previousGameResult')) {
         localStorage.setItem('previousGameResult', 'false');
     }
 }
 
-function nbOfWin(){
-        nbWin++;
-        localStorage.setItem('nbOfWin', nbWin.toString());
+function nbOfWin() {
+    nbWin++;
+    localStorage.setItem('nbOfWin', nbWin.toString());
 }
 
-function winningStreakNumber(){
-    if(isPreviousGameWon() === 'true'){
+function winningStreakNumber() {
+    if (isPreviousGameWon() === 'true') {
         winningStreak++;
         localStorage.setItem('winningStreak', winningStreak.toString());
-    }else{
+    } else {
         winningStreak = 0;
         localStorage.setItem('winningStreak', winningStreak.toString());
     }
 }
-function isPreviousGameWon(){
+function isPreviousGameWon() {
     let result = localStorage.getItem('previousGameResult');
     return result;
 }
 
-function scoreDisplay(){
+function scoreDisplay() {
     $('#nbOfWin').text(localStorage.getItem('nbOfWin'));
     $('#winningStreak').text(localStorage.getItem('winningStreak'));
+}
+
+function resetKeyboardTouchColor(){
+    let table = ['.letter-firstRow', '.letter-secondRow', '.letter-thirdRow'];
+    for (i = 0; i < table.length; i++) {
+        for (j = 0; j < $(table[i]).children().length; j++) {
+                $(table[i]).children().eq(j).removeClass('light yellow red');
+        }
+    }
 }
 
 
