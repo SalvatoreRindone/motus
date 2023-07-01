@@ -1,7 +1,8 @@
 let word = {
     name: ".",
     listOfLetter: [],
-    listForRep: []
+    listForRep: [],
+    listOfPos: []
 };
 let cptRow = 1;
 let cptCol = 0;
@@ -111,17 +112,6 @@ function table(length) {
     for (let i = 1; i <= length; i++) {
         $('.row').append('<td class="case">.</td>');
     }
-    if (window.innerWidth > 500) {
-        let containerMidLength = (word.name.length * 50) / 2;
-        $('.container').css('left', 'calc(40% - ' + containerMidLength + 'px)');
-        $('#com').css('left', 'calc(40% - ' + containerMidLength + 'px)');
-        $('#com').css('width', length * 50 + 'px');
-    } else {
-        let containerMidLength = (word.name.length * 31) / 2;
-        $('.container').css('left', 'calc(40% - ' + containerMidLength + 'px)');
-        $('#com').css('left', 'calc(40% - ' + containerMidLength + 'px)');
-        $('#com').css('width', length * 31 + 'px');
-    }
 }
 /** Return the right element of the DOM for a specific case */
 function rightCase(col) {
@@ -208,22 +198,41 @@ function nextStep() {
     }
 }
 
+function completeListOfPos() {
+    let i = 0;
+    let currentCase = rightCase(i);
+    for (i; i < word.name.length; i++) {
+        currentCase = rightCase(i);
+        if (word.name.charAt(i) === currentCase.text()) {
+            word.listOfLetter[i] = ".";
+            word.listForRep[i] = ".";
+            word.listOfPos.push(i);
+        }
+    }
+}
+
 
 /** Manage the color of the game and the user inputs */
 function colorMaker() {
     turnUserInputOff();
+    completeListOfPos();
 
     let i = 0; // Index initial
+    let g = 0;
 
     let intervalId = setInterval(function () {
         if (i < word.name.length) {
             let currentCase = rightCase(i);
-            if (word.name.charAt(i) === currentCase.text()) {
-                currentCase.addClass('red');
-                keyboardColor(currentCase.text(), 'red');
-                word.listOfLetter[i] = ".";
-                word.listForRep[i] = ".";
-            } else if (word.listForRep.includes(currentCase.text())) {
+            if (g !== word.listOfPos.length) {
+                if (i === word.listOfPos[g]) {
+                    console.log(i);
+            console.log(word.listOfPos[g]);
+                    g++;
+                    currentCase.addClass('red');
+                    keyboardColor(currentCase.text(), 'red');
+                }
+            }
+            if (word.listForRep.includes(currentCase.text())) {
                 currentCase.addClass('yellow');
                 keyboardColor(currentCase.text(), 'yellow');
                 turnDown(currentCase.text());
@@ -275,6 +284,7 @@ function isGameOver() {
 function resetTable() {
     word.listForRep.length = 0;
     word.listOfLetter.length = 0;
+    word.listOfPos.length = 0;
 }
 
 
@@ -332,11 +342,11 @@ function scoreDisplay() {
     $('#winningStreak').text(localStorage.getItem('winningStreak'));
 }
 
-function resetKeyboardTouchColor(){
+function resetKeyboardTouchColor() {
     let table = ['.letter-firstRow', '.letter-secondRow', '.letter-thirdRow'];
     for (i = 0; i < table.length; i++) {
         for (j = 0; j < $(table[i]).children().length; j++) {
-                $(table[i]).children().eq(j).removeClass('light yellow red');
+            $(table[i]).children().eq(j).removeClass('light yellow red');
         }
     }
 }
